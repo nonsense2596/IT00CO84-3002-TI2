@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -8,6 +8,8 @@ using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.EntityFrameworkCore;
+using PeterSzatmaryTurnIn1.Data;
 
 namespace PeterSzatmaryTurnIn1
 {
@@ -24,6 +26,9 @@ namespace PeterSzatmaryTurnIn1
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllersWithViews();
+
+            services.AddDbContext<PeterSzatmaryTurnIn1Context>(options =>
+                    options.UseSqlServer(Configuration.GetConnectionString("PeterSzatmaryTurnIn1Context")));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
